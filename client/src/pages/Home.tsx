@@ -194,7 +194,7 @@ export default function Home() {
       <section className="px-8 md:px-12 lg:px-24 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 max-w-7xl mx-auto">
           {/* About Content + Quote */}
-          <div className="lg:col-span-7 lg:col-start-2">
+          <div className="lg:col-span-7">
             <h2 className="serif-headline text-4xl font-bold text-primary mb-8 border-l-4 border-tertiary-fixed-dim pl-6">
               Research &amp; Collaboration
             </h2>
@@ -233,7 +233,7 @@ export default function Home() {
           </div>
 
           {/* Research Areas */}
-          <aside className="lg:col-span-4 flex flex-col gap-4 justify-start pt-2">
+          <aside className="lg:col-span-4 lg:col-start-9 flex flex-col gap-4 justify-start pt-2">
             <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary/50 mb-2 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-primary/40" />
               Research Areas
@@ -247,9 +247,9 @@ export default function Home() {
                   <span className="material-symbols-outlined text-primary/60 text-xl">
                     {area.icon}
                   </span>
-                  <h4 className="text-sm font-semibold text-primary">{area.label}</h4>
+                  <h4 className="text-base font-semibold text-primary">{area.label}</h4>
                 </div>
-                <p className="text-xs text-on-surface-variant leading-relaxed">{area.desc}</p>
+                <p className="text-sm text-on-surface-variant leading-relaxed">{area.desc}</p>
               </div>
             ))}
             <Link
