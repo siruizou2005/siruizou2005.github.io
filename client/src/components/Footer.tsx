@@ -8,7 +8,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Sirui Zou · UC Berkeley · Intellectual Modernism
           </p>
         </div>
-        <div className="flex items-center gap-8">
+        <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-8">
           {[
             { label: 'Contact', href: 'mailto:siruizou2005@gmail.com' },
             { label: 'LinkedIn', href: 'https://www.linkedin.com/in/siruizou' },

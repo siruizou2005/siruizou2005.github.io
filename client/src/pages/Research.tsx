@@ -76,7 +76,7 @@ export default function Research() {
         </div>
 
         {/* Project 3: ScrollWeaver */}
-        <div className="md:col-span-6 group bg-primary p-12 text-on-primary relative overflow-hidden">
+        <div className="md:col-span-6 group bg-primary p-8 md:p-12 text-on-primary relative overflow-hidden">
           <div className="relative z-10">
             <div className="mb-4">
               <span className="px-3 py-1 bg-white/10 text-white text-[10px] uppercase tracking-widest font-semibold border border-white/20 rounded-sm">

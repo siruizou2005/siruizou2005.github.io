@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section — full viewport, centered */}
-      <section className="h-screen flex items-center px-6 md:px-10 lg:px-16 pt-20 overflow-hidden">
+      <section className="min-h-screen flex items-center px-6 md:px-10 lg:px-16 pt-28 lg:pt-20 pb-16 lg:pb-0">
         <div className="w-full max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
 
           {/* Left: Identity — top group up top, CTA group pinned to bottom */}
@@ -52,13 +52,27 @@ export default function Home() {
                 </span>
               </div>
 
-              <h1
-                className="serif-headline font-bold text-primary tracking-tighter leading-[0.86]"
-                style={{ fontSize: 'clamp(4rem, 8.5vw, 10rem)' }}
-              >
-                Sirui <br />
-                <span className="italic text-primary/80">Zou.</span>
-              </h1>
+              {/* Headline row: name left, portrait right on mobile */}
+              <div className="flex items-start justify-between gap-4">
+                <h1
+                  className="serif-headline font-bold text-primary tracking-tighter leading-[0.86]"
+                  style={{ fontSize: 'clamp(4rem, 8.5vw, 10rem)' }}
+                >
+                  Sirui <br />
+                  <span className="italic text-primary/80">Zou.</span>
+                </h1>
+                {/* Portrait — mobile only, floated to right of headline */}
+                <div
+                  className="lg:hidden w-24 h-24 rounded-full overflow-hidden shrink-0 mt-1"
+                  style={{ boxShadow: '0 6px 20px -8px rgba(0, 29, 61, 0.22)' }}
+                >
+                  <img
+                    src="/avatar.jpg"
+                    alt="Portrait of Sirui Zou"
+                    className="w-full h-full object-cover object-[center_20%]"
+                  />
+                </div>
+              </div>
 
               <p className="text-on-surface-variant text-base leading-relaxed max-w-xl">
                 2nd-year undergrad at SWUFE · Visiting Student at UC Berkeley (BGA Program).
@@ -128,9 +142,9 @@ export default function Home() {
 
           {/* Right: portrait + Recent Updates — bottom-aligned with the left column */}
           <div className="flex flex-col gap-6 py-4 lg:items-center lg:justify-end">
-            {/* Portrait — sized to balance the headline */}
+            {/* Portrait — desktop only */}
             <div
-              className="w-72 h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden shrink-0"
+              className="hidden lg:block w-80 h-80 rounded-full overflow-hidden shrink-0"
               style={{ boxShadow: '0 12px 40px -16px rgba(0, 29, 61, 0.22)' }}
             >
               <img
