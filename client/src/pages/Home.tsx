@@ -177,7 +177,7 @@ export default function Home() {
                 ))}
               </div>
               <Link
-                to="/blog"
+                to="/cv"
                 className="self-start flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-primary border border-primary/30 px-4 py-2 rounded hover:bg-primary hover:text-on-primary transition-all group"
               >
                 Full Timeline
