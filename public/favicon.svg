@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SZ">
+  <!-- Broadsheet 的墨色底 + 纸色衬线字母，深浅主题下都清晰。
+       刻意不加报头规线：那些细节在 16px 的标签页里只会糊成灰条，
+       让字母占满整个方块才是这个尺寸下唯一有效的做法。 -->
+  <rect width="64" height="64" rx="9" fill="#201e1d"/>
+  <text x="32" y="46"
+        font-family="Georgia, 'Times New Roman', 'Source Serif 4', serif"
+        font-size="40" font-weight="700" letter-spacing="-2"
+        text-anchor="middle" fill="#f3f2f2">SZ</text>
+</svg>

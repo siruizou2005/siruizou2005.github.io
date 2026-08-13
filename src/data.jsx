@@ -31,11 +31,10 @@ export const about = [
   <>
     I am a sophomore studying Economics at the Southwestern University of
     Finance and Economics (SWUFE), advised by Prof.{" "}
-    <a href="https://econ.swufe.edu.cn/info/1041/1764.htm">Hong Zou</a>, Dean
-    of the School of Economics. I spent Spring 2026 as a visiting student at
-    UC Berkeley. Currently, I am a research intern working with{" "}
+    <a href="https://econ.swufe.edu.cn/info/1041/1764.htm">Hong Zou</a>. I
+    spent Spring 2026 as a visiting student at UC Berkeley. Currently, I am a research intern working with{" "}
     <a href="https://kehang-zhu.github.io/">Kehang Zhu</a> (Harvard) on
-    LLM-based market simulation, on a project advised by{" "}
+    LLM-based market simulation, a project advised by{" "}
     <a href="https://john-joseph-horton.com/">Prof. John Horton</a> (MIT
     Sloan).
   </>,

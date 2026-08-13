@@ -1,0 +1,21 @@
+# 全部允许，包括 AI 爬虫——本站内容就是希望被检索和引用的
+User-agent: *
+Allow: /
+
+# 明确列出主要 AI 爬虫，避免个别实现按「未列出即保守处理」对待
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://siruizou.com/sitemap.xml
