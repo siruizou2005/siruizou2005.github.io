@@ -1,0 +1,209 @@
+\documentclass[11pt,a4paper]{article}
+
+%-------------------------------------------
+% 1. 宏包设置
+%-------------------------------------------
+\usepackage[UTF8, scheme=chinese, fontset=fandol]{ctex}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{geometry}
+\usepackage{fontspec}
+\usepackage{fontawesome5}
+
+%-------------------------------------------
+% 2. 颜色与布局配置
+%-------------------------------------------
+\definecolor{AcademicBlue}{RGB}{0, 90, 180}
+
+% 页面边距 (极限优化)
+\geometry{left=1.27cm, right=1.27cm, top=1.27cm, bottom=1.27cm}
+
+% 字体配置
+\setmainfont{TeX Gyre Termes}
+
+\pagestyle{fancy}
+\fancyhf{} 
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\footskip}{14pt} % silence fancyhdr "footskip too small" warning (footer is empty)
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% 列表间距极致优化
+\setlength{\itemsep}{-3pt} 
+
+%-------------------------------------------
+% 3. 标题格式自定义
+%-------------------------------------------
+\titleformat{\section}{
+  \vspace{-8pt}\scshape\raggedright\large\bfseries\color{AcademicBlue}
+}{}{0em}{}[\color{AcademicBlue}\titlerule \vspace{-7pt}]
+
+%-------------------------------------------
+% 4. 自定义命令
+%-------------------------------------------
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\color{AcademicBlue}#2} \\[-3pt] 
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \vspace{-1pt}\item
+    % 左栏用 tabularx 的 X 列而不是 l 列：l 列不折行，长标题会把右栏推出页面。
+    % X 列自动占满剩余宽度并换行，raggedright 避免长标题被两端对齐拉出大字距。
+    \begin{tabularx}{0.97\textwidth}{@{}>{\raggedright\arraybackslash}X@{\hspace{1.2em}}r@{}}
+      \small#1 & \textbf{\color{AcademicBlue}#2} \\
+    \end{tabularx}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in, label={\tiny\raisebox{0.5ex}{\color{AcademicBlue}$\bullet$}}]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  简历正文  %%%%%%
+%-------------------------------------------
+\begin{document}
+%----------HEADER----------
+\begin{center}
+    {\Huge \textbf{\color{AcademicBlue}Sirui Zou}} \\ \vspace{2pt}
+    \small 
+    \faPhone \hspace{2pt} \href{tel:5105423302}{+1 510-542-3302} \quad | \quad 
+    \faEnvelope \hspace{2pt} \href{mailto:siruizou2005@gmail.com}{siruizou2005@gmail.com} \quad | \quad 
+    \faGlobe \hspace{2pt} \href{https://siruizou.com}{siruizou.com}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+  
+    \resumeSubheading
+      {Southwestern University of Finance and Economics}{Sep 2024 -- Jun 2028 (Expected)}
+      {Economics}{Chengdu, China}
+      \resumeItemListStart
+        \resumeItem{\textbf{Academics \& Quant}: GPA: 3.9/4.0 \quad | \quad GRE Quant: 170/170 \quad | \quad GMAT FE: 655 (Top 9\% Globally, Pre-enrollment)}
+        \resumeItem{\textbf{Core Courses}: Macroeconomics (A+), Python (A+), Advanced Math (A), Linear Algebra (A), Probability \& Statistics (A-)}
+        \resumeItem{\textbf{Scholarships}: Academic Scholarship ('24, '25), Innovation \& Entrepreneurship Scholarship ('24)}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {University of California, Berkeley}{Jan 2026 -- May 2026}
+      {Visiting Student: BGA Program \quad Focus: Economics \& Computational Social Science}{Berkeley, CA, USA}
+      \resumeItemListStart
+        \resumeItem{\textbf{Core Courses}: Econometrics (A), Computational Models of Cognition (A+), Challenge Lab (A+)}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Peking University (National School of Development)}{Jul 2025 -- Aug 2025}
+      {Summer School: Quantitative Finance}{Beijing, China}
+      \resumeItemListStart
+        \resumeItem{\textbf{Grade}: \textbf{A+} (Top 10/150). Focused on stochastic analysis and quantitative pricing models.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------PUBLICATIONS-----------
+\section{Publications}
+  \resumeSubHeadingListStart
+
+    \resumeProjectHeading
+      {\textbf{PersonaForge: Psychology-Grounded Dual-Process Architecture for Personality-Consistent Role-Playing Agents}}{\textbf{Findings of ACL 2026}}
+    \resumeItemListStart
+        \resumeItem{Jizhou Tong\textsuperscript{*}, Sirui Zou\textsuperscript{*} \enspace \footnotesize\emph{*equal contribution} \normalsize \enspace \href{https://aclanthology.org/2026.findings-acl.386/}{aclanthology.org/2026.findings-acl.386}}
+        \resumeItem{\textbf{Method}: Designed a three-layer personality architecture (Big Five + Defense Mechanisms + Dynamic State) with a selective dual-process generation mechanism, addressing LLM ``persona drift'' in long-text role-playing simulations.}
+        \resumeItem{\textbf{Results}: Reduced persona drift by \textbf{75\%} (6.3\% vs. 24.8\% baseline) across 50-turn dialogues on 88 characters; selective activation achieves \textbf{96\%} of full-system performance with only \textbf{13.4\%} token overhead. Validated on RoleBench with \textbf{73.2\%} pairwise win-rate.}
+    \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------RESEARCH EXPERIENCE-----------
+\section{Academic \& Research Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Generative Market Simulation}{Apr 2026 -- Present}
+      {\footnotesize\emph{Supervised by Kehang Zhu (Harvard); advised by Prof. John Horton (MIT Sloan)}}{}
+    \resumeItemListStart
+        \resumeItem{\textbf{Research Question}: When LLM agents trade in a realistic prediction market with unrestricted action spaces and no hard-coded strategies, which strategies come to dominate (including any beyond known human repertoires), how do prices form, and how does wealth concentrate over time?}
+        \resumeItem{\textbf{Method}: Built the testbed, a binary prediction-market engine (collateral-backed YES/NO minting/merging, order-book matching) that LLM agents drive through the same tool interface a human trader would use, with a live dashboard and full replay logs. Core design principle: the researcher designs the environment (information, institutions, incentives) but never scripts agent behavior. Validated that a bare LLM trades rationally before running strategy experiments.}
+    \resumeItemListEnd
+
+    \resumeSubheading
+      {Decoding China's Consumption Policy}{Jan 2026 -- Present}
+      {\footnotesize\emph{Project Lead (Advisors: Prof. Hong Zou, Dean of School of Economics, \& Dr. Han Xiao, SWUFE)}}{}
+    \resumeItemListStart
+        \resumeItem{\textbf{Research Question}: How can China's consumption-promotion policies (which instruments, for which target groups and goods, at what intensity) be measured systematically and reproducibly across large volumes of heterogeneous, often implicitly-worded government documents?}
+        \resumeItem{\textbf{Method}: Leading a two-stage text-as-data pipeline on 5M+ government documents (mainly 2006--2024): (1) a fine-tuned BERT classifier, benchmarked against keyword search and LLMs, to screen consumption-promotion policies; (2) LLM-based structured extraction of policy attributes (instrument type, intensity, target population, goods category, intergovernmental citation), with manual gold-standard annotation, cross-model consistency checks, and hallucination controls. Building China's first independently cross-verified national consumption-policy database for downstream city-panel analysis.}
+    \resumeItemListEnd
+
+    \newpage
+    \resumeSubheading
+      {Basic Public Service Equalization and Common Prosperity}{Jan 2026 -- May 2026}
+      {\footnotesize\emph{Research Assistant (Advisor: Prof. Fan Wei, SWUFE) $\cdot$ Sichuan Province-Level Research Grant}}{}
+    \resumeItemListStart
+        \resumeItem{\textbf{Research Question}: Does inequality in basic public services (BPS) worsen urban-rural income inequality, and which dimensions matter most?}
+        \resumeItem{\textbf{Method}: Constructed a city-year panel (280 cities, 2012--2024) with Theil index and BPS Gini coefficients; estimated two-way fixed effects models across six BPS dimensions (education, healthcare, social security, infrastructure, culture, ecology).}
+        \resumeItem{\textbf{Conclusion}: BPS inequality significantly exacerbates urban-rural income inequality across all six dimensions, supporting an ``inequality $\rightarrow$ inequality'' mechanism; ecological and educational BPS show the largest effects.}
+    \resumeItemListEnd
+      
+  \resumeSubHeadingListEnd
+
+%-----------TECHNICAL PROJECTS-----------
+\section{Technical \& Engineering Projects}
+  \resumeSubHeadingListStart
+
+    \resumeProjectHeading
+      {\textbf{ScrollWeaver \& Soulverse}: Multi-Agent Social Simulation Engine \quad \footnotesize\emph{Team Lead}}{Oct 2025 -- Dec 2025}
+      \resumeItemListStart
+        % 第一个分段：项目介绍（核心概念与成果）
+        \resumeItem{\textbf{Project Overview}: Designed and developed a multi-agent social simulation engine that breathes life into static texts (novels, worldbuilding documents, lore collections), transforming them into interactive, co-creatable, and exportable living worlds. (\textbf{Global 3rd Prize, 2025 Soul AI Agent Competition})}
+        
+        % 第二个分段：技术实现（底层架构与AI能力）
+        \resumeItem{\textbf{Technical Implementation}: Built a LangChain-based Orchestrator-Performer architecture with FastAPI/WebSockets for real-time streaming and D3.js for dynamic maps. Empowered multi-LLM agents (GPT, Claude) with autonomous logic and social deduction via RAG, ChromaDB/SQLite memory, a 3-layer personality model, and a dual-process cognitive architecture.}
+      \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Magic Brush}: AI-Powered Drawing Tutor for Children \quad \footnotesize\emph{Private Developer}}{Nov 2025 -- Dec 2025}
+      \resumeItemListStart
+        \resumeItem{Competed in the \textbf{Doubao $\times$ Intel ``Make Ideas Real'' AI App Creation Challenge}; awarded \textbf{Bronze Prize (Top 30)}. Built an AI-powered step-by-step sketch drawing assistant designed to engage children independently through interactive guidance and real-time feedback.}
+        \resumeItem{\textbf{Stack}: Doubao App Generation platform; multi-turn interactive dialogue flow with progressive drawing instruction and child-friendly UX design.}
+      \resumeItemListEnd
+
+    \resumeProjectHeading
+      {\textbf{Course Prism: Course Evaluation \& Retrieval Community} \quad \footnotesize\emph{Private Developer}}{Mar 2025 -- Jun 2025}
+      \resumeItemListStart
+        \resumeItem{\textbf{Development}: Independently developed SWUFE's open-source course evaluation platform. Built interactive UI via Next.js/React and implemented RESTful APIs/unified auth using Django REST, PostgreSQL, and Redis.}
+        \resumeItem{\textbf{Deployment}: Configured Docker Compose, Nginx reverse proxy, and Huey async task queues for one-click containerized deployment, automated data backup, and rapid recovery.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------SKILLS-----------
+\section{Skills \& Interests}
+\vspace{2pt}
+\begin{small}
+\noindent \textbf{Tools}: Python (PyTorch, Pandas, NumPy), SQL, Stata, LaTeX, Linux, Docker, Git \\[2pt]
+\textbf{Interests}: Computational Social Science, Economics, NLP, LLM Agents \\[2pt]
+\textbf{Languages}: English (IELTS 7.0), Mandarin (Native)
+\end{small}
+
+\end{document}

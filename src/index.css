@@ -1,0 +1,385 @@
+/* ── Broadsheet 设计系统 tokens（来自 claude.ai/design 项目）──── */
+:root {
+  --color-bg: #f3f2f2;
+  --color-surface: #eae9e9;
+  --color-text: #201e1d;
+  --color-accent: #0088b0;
+  --color-accent-700: #006786;
+  --color-divider: color-mix(in srgb, #201e1d 16%, transparent);
+  --font-heading: "Source Serif 4", Georgia, serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+
+  /* 中文字体。默认宋体（思源宋体，与 Source Serif 4 同为衬线，风格相配）。
+     想换楷书就把下面两行对调 —— 但注意楷书没有可靠的网络字体，
+     只能依赖访客本机装了楷体（Mac/Windows 一般有，Linux 和部分手机没有）。 */
+  --font-cn: "Noto Serif SC", "Songti SC", "SimSun", serif;
+  /* --font-cn: "Kaiti SC", "STKaiti", "KaiTi", serif; */
+
+  /* 通栏布局的三个基准量：内容最大宽、左右留白、侧栏宽。
+     .site-header 和 .page 共用前两个，标题才能和正文左对齐。 */
+  --content-max: 1320px;
+  --gutter: 76px;
+  --sidebar-w: 268px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+a {
+  color: var(--color-accent-700);
+  text-underline-offset: 3px;
+}
+a:hover {
+  color: var(--color-accent);
+}
+
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+}
+
+.muted {
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+.muted-2 {
+  color: color-mix(in srgb, var(--color-text) 60%, transparent);
+}
+
+/* ── 通栏姓名栏 ─────────────────────────────────────────────
+   border-bottom 挂在全宽的 header 上，所以细线横贯整个视口；
+   里面的 h1 用和 .page 相同的 max-width + padding，保证左对齐。 */
+.site-header {
+  border-bottom: 1px solid var(--color-divider);
+}
+.site-header h1 {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 30px var(--gutter);
+  font-size: 38px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+.site-header .cn {
+  font-family: var(--font-cn);
+  /* 不能用 1em：汉字几乎占满字身框，拉丁大写只占约 70%，
+     同字号下中文会大出 22%。0.82em 是两者墨迹严格等高的点，
+     这里取 0.86em 让中文略重一点，仍在英文行盒之内不顶出去。 */
+  font-size: 0.86em;
+  letter-spacing: 0; /* 中文字形不需要英文的负字距 */
+  font-weight: 400;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+
+/* ── 主体：左侧个人栏 + 右侧铺满的正文栏 ─────────────────── */
+.page {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  gap: 64px;
+  padding: 52px var(--gutter) 96px;
+}
+
+/* — 侧栏 — */
+aside {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 6px;
+}
+.avatar-wrap {
+  width: 200px;
+  max-width: 100%;
+  aspect-ratio: 5 / 6; /* 竖椭圆：非正方形的盒子配 border-radius:50% 即为椭圆 */
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider);
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+}
+.avatar-wrap::before {
+  content: "照片";
+  grid-area: 1 / 1;
+}
+.avatar {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.avatar:not([src]) {
+  visibility: hidden;
+}
+.side-name {
+  font-size: 25px;
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+.side-role {
+  font-size: 16px;
+  line-height: 1.55;
+  margin: 8px 0 0;
+}
+.side-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 15.5px;
+  line-height: 1.4;
+}
+.side-links a {
+  text-decoration: none;
+}
+.side-links a:hover {
+  text-decoration: underline;
+}
+
+/* — 正文栏 —
+   正文、分节线、条目一律不再单独设 max-width：全部撑满主栏，
+   右边缘因此完全对齐，页面读起来是「铺满」的一整块。 */
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  min-width: 0;
+}
+
+section h2 {
+  font-size: 30px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin: 0 0 10px;
+}
+section hr {
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-text) 25%, transparent);
+  margin: 0 0 24px;
+}
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.prose p {
+  margin: 0;
+}
+
+.pub + .pub {
+  margin-top: 22px;
+}
+.pub-title {
+  font-size: 17.5px;
+  line-height: 1.5;
+  margin: 0;
+}
+.pub-meta {
+  font-size: 15.5px;
+  line-height: 1.5;
+  margin: 6px 0 0;
+}
+.pub-venue {
+  font-size: 15.5px;
+  line-height: 1.5;
+  margin: 2px 0 0;
+}
+
+/* 论文条目下的方框按钮：Abstract / Paper / BibTeX */
+.pub-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  font: inherit;
+  font-size: 13.5px;
+  line-height: 1;
+  padding: 6px 11px;
+  color: var(--color-accent-700);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-accent-700) 45%, transparent);
+  border-radius: var(--radius-sm, 3px);
+  text-decoration: none;
+  cursor: pointer;
+}
+.pill:hover {
+  background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  border-color: var(--color-accent-700);
+}
+.pill.is-open {
+  background: var(--color-accent-700);
+  border-color: var(--color-accent-700);
+  color: var(--color-bg);
+}
+
+/* Abstract / BibTeX 的展开面板 */
+.pub-panel {
+  position: relative;
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: var(--color-surface);
+  border-left: 2px solid color-mix(in srgb, var(--color-text) 25%, transparent);
+  font-size: 15px;
+  line-height: 1.65;
+}
+.pub-panel pre {
+  margin: 0;
+  padding-right: 72px; /* 给右上角的 Copy 按钮让位 */
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12.5px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.pill-copy {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 12.5px;
+  padding: 4px 9px;
+  background: var(--color-bg);
+}
+
+/* Education 与 Research Experience 共用的条目列表。
+   两列：机构+角色撑开，日期靠右成一列；有校徽时在最前面多一列。 */
+.entries {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: baseline;
+}
+.entries.has-logo .entry {
+  grid-template-columns: 48px 1fr auto;
+  gap: 20px;
+  align-items: center; /* 校徽与整条居中对齐，比 baseline 更稳 */
+}
+.entry-logo {
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+.entry-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.entry-org {
+  font-size: 17px;
+  margin: 0;
+}
+/* 项目描述：正文墨色，比指导老师那行重，形成
+   粗体标题 > 描述 > 指导信息 的三级层次 */
+.entry-desc {
+  font-size: 15.5px;
+  line-height: 1.6;
+  margin: 5px 0 0;
+  max-width: 78ch;
+}
+.entry-role {
+  font-size: 15.5px;
+  margin: 4px 0 0;
+}
+.entry-date {
+  font-size: 15px;
+  white-space: nowrap; /* 日期不折行，右列才对得齐 */
+}
+
+footer {
+  margin-top: 8px;
+  font-size: 14px;
+  color: color-mix(in srgb, var(--color-text) 50%, transparent);
+}
+
+/* ── 响应式 ────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  :root {
+    --gutter: 48px;
+    --sidebar-w: 220px;
+  }
+  .page {
+    gap: 48px;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --gutter: 24px;
+  }
+  body {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  .site-header h1 {
+    padding: 22px var(--gutter);
+    font-size: 30px;
+  }
+  .page {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 36px var(--gutter) 64px;
+  }
+  .avatar-wrap {
+    width: 150px;
+  }
+  section h2 {
+    font-size: 25px;
+  }
+  /* 窄屏：日期换到下一行，避免和长机构名挤在一起 */
+  .entry,
+  .entries.has-logo .entry {
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+  }
+  .entry > div {
+    grid-column: 2;
+  }
+  .entry-date {
+    grid-column: 2;
+    white-space: normal;
+  }
+  .entries:not(.has-logo) .entry {
+    grid-template-columns: 1fr;
+  }
+  .entries:not(.has-logo) .entry > div,
+  .entries:not(.has-logo) .entry-date {
+    grid-column: 1;
+  }
+}
