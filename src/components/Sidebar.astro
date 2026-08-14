@@ -1,0 +1,52 @@
+---
+import { profile } from "../data.js";
+---
+
+<aside>
+  <div class="avatar-wrap">
+    <img
+      class="avatar"
+      src={profile.photo}
+      alt={`Portrait of ${profile.nameEn}`}
+    />
+  </div>
+  <div>
+    <h2 class="side-name">{profile.nameEn}</h2>
+    <p class="side-role muted">
+      {
+        profile.role.map((line, i) => (
+          <span>
+            {line}
+            {i < profile.role.length - 1 && <br />}
+          </span>
+        ))
+      }
+    </p>
+  </div>
+  <div class="side-links">
+    <span class="muted">{profile.location}</span>
+    {
+      profile.links.map((l) => (
+        <a
+          href={l.href}
+          target={l.newTab ? "_blank" : undefined}
+          rel={l.newTab ? "noopener noreferrer" : undefined}
+        >
+          {l.label}
+        </a>
+      ))
+    }
+  </div>
+</aside>
+
+<script>
+  // 照片加载失败时摘掉 src，让 .avatar-wrap 的「照片」占位显出来
+  // （原 React 版是 img 的 onError，这里等价处理）。
+  document.querySelectorAll("img.avatar").forEach((img) => {
+    const drop = () => img.removeAttribute("src");
+    img.addEventListener("error", drop);
+    // 脚本是 defer 的，图片可能在它执行前就已经失败（error 事件错过了），
+    // 所以补一次同步检查：加载完成但没有像素＝加载失败。
+    if (img.complete && img.naturalWidth === 0) drop();
+  });
+</script>

@@ -1,0 +1,176 @@
+---
+import Sidebar from "../components/Sidebar.astro";
+import Section from "../components/Section.astro";
+import EntryList from "../components/EntryList.astro";
+import PubItem from "../components/PubItem.astro";
+import {
+  profile,
+  about,
+  education,
+  publications,
+  workingPapers,
+  experience,
+  projects,
+  lastUpdated,
+} from "../data.js";
+import "../styles/index.css";
+
+const description =
+  "Sirui Zou (邹思瑞) is an undergraduate in Economics at the Southwestern " +
+  "University of Finance and Economics, working on LLM agents for economic " +
+  "simulation, computational social science, and text-as-data.";
+const socialDescription =
+  "Undergraduate in Economics at SWUFE. LLM agents for economic simulation, " +
+  "computational social science, text-as-data.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Sirui Zou",
+  alternateName: "邹思瑞",
+  url: "https://siruizou.com/",
+  image: "https://siruizou.com/photo.jpg",
+  email: "mailto:siruizou2005@gmail.com",
+  jobTitle: "Undergraduate Researcher",
+  description:
+    "Undergraduate in Economics at the Southwestern University of Finance " +
+    "and Economics, working on LLM-based market simulation, computational " +
+    "social science, and text-as-data methods for policy analysis.",
+  affiliation: {
+    "@type": "CollegeOrUniversity",
+    name: "Southwestern University of Finance and Economics",
+    sameAs: "https://www.swufe.edu.cn/",
+  },
+  alumniOf: [
+    {
+      "@type": "CollegeOrUniversity",
+      name: "University of California, Berkeley",
+      sameAs: "https://www.berkeley.edu/",
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      name: "Peking University",
+      sameAs: "https://www.pku.edu.cn/",
+    },
+  ],
+  homeLocation: {
+    "@type": "Place",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Chengdu",
+      addressCountry: "CN",
+    },
+  },
+  knowsAbout: [
+    "Computational Social Science",
+    "LLM Agents",
+    "Market Design",
+    "Text as Data",
+    "Natural Language Processing",
+    "Economics",
+  ],
+  sameAs: [
+    "https://github.com/siruizou2005",
+    "https://scholar.google.com/citations?user=lpaB53UAAAAJ",
+  ],
+};
+
+// 首屏图片提前预载（原 React 19 版本会自动吐这几条 link，这里显式写出来）
+const preloadImages = [
+  profile.photo,
+  ...education.map((e) => e.logo).filter(Boolean),
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Sirui Zou 邹思瑞</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href="https://siruizou.com/" />
+    <meta name="author" content="Sirui Zou" />
+
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+
+    <!-- 社交平台分享卡片（微信、Twitter、LinkedIn 读的是这些，不执行 JS） -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Sirui Zou" />
+    <meta property="og:title" content="Sirui Zou 邹思瑞" />
+    <meta property="og:description" content={socialDescription} />
+    <meta property="og:url" content="https://siruizou.com/" />
+    <meta property="og:image" content="https://siruizou.com/photo.jpg" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="zh_CN" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Sirui Zou 邹思瑞" />
+    <meta name="twitter:description" content={socialDescription} />
+    <meta name="twitter:image" content="https://siruizou.com/photo.jpg" />
+
+    <!-- 结构化数据：让搜索引擎和 AI 明确知道「这是谁、在哪、做什么、发了什么」 -->
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(jsonLd)}
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Noto+Serif+SC:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    {preloadImages.map((src) => <link rel="preload" as="image" href={src} />)}
+  </head>
+  <body>
+    {/* 通栏姓名栏：细线 full-bleed 横跨视口，标题与下方内容左对齐 */}
+    <header class="site-header">
+      <h1>
+        {profile.nameEn} <span class="cn">{profile.nameCn}</span>
+      </h1>
+    </header>
+
+    <div class="page">
+      <Sidebar />
+
+      <main>
+        <Section id="about" title="About Me">
+          <div class="prose">
+            {about.map((para) => <p set:html={para} />)}
+          </div>
+        </Section>
+
+        <Section id="education" title="Education">
+          <EntryList items={education} />
+        </Section>
+
+        <Section id="publications" title="Publications">
+          {publications.map((p) => <PubItem {...p} />)}
+        </Section>
+
+        {
+          workingPapers.length > 0 && (
+            <Section id="working-papers" title="Working Papers">
+              {workingPapers.map((p) => (
+                <PubItem {...p} />
+              ))}
+            </Section>
+          )
+        }
+
+        <Section id="experience" title="Research Experience">
+          <EntryList items={experience} />
+        </Section>
+
+        <Section id="projects" title="Projects">
+          <EntryList items={projects} />
+        </Section>
+
+        <footer>Last updated {lastUpdated}</footer>
+      </main>
+    </div>
+  </body>
+</html>

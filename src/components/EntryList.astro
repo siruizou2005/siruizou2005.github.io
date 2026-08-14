@@ -1,0 +1,40 @@
+---
+// Education 和 Research Experience 共用：可选校徽在左，机构名和角色居中，
+// 日期右对齐成一列。两个板块用同一个组件，排版不会走样。
+const { items } = Astro.props;
+const withLogo = items.some((e) => e.logo);
+---
+
+<div class:list={["entries", withLogo && "has-logo"]}>
+  {
+    items.map((e) => (
+      <div class="entry">
+        {withLogo && (
+          <span class="entry-logo">{e.logo && <img src={e.logo} alt="" />}</span>
+        )}
+        <div>
+          <p class="entry-org">
+            <strong>{e.org}</strong>
+          </p>
+          {/* 描述在前、指导老师在后：先让人知道这是什么，再交代由谁指导 */}
+          {e.desc && <p class="entry-desc">{e.desc}</p>}
+          {/* 链接接在角色行末尾，用「·」分隔，避免单个按钮孤零零占一行 */}
+          {(e.role || e.links?.length > 0) && (
+            <p class="entry-role muted">
+              {e.role}
+              {e.links?.map((l, i) => (
+                <span>
+                  {(e.role || i > 0) && " · "}
+                  <a href={l.href} target="_blank" rel="noopener noreferrer">
+                    {l.label}
+                  </a>
+                </span>
+              ))}
+            </p>
+          )}
+        </div>
+        <span class="entry-date muted-2">{e.date}</span>
+      </div>
+    ))
+  }
+</div>

@@ -1,0 +1,91 @@
+---
+// 论文条目：标题 / 作者 / 出处，下面一排方框按钮。
+// Abstract 和 BibTeX 就地展开，Paper、Code 直接跳外链。
+// 两个面板在 HTML 里就存在（带 hidden），由脚本切换显示——
+// 这样不执行 JS 的爬虫也能读到摘要，视觉表现与原来一致。
+const { title, authors, venue, abstract, bibtex, links = [], meta } = Astro.props;
+---
+
+<div class="pub">
+  <p class="pub-title">
+    <strong>{title}</strong>
+  </p>
+  {authors && <p class="pub-meta muted" set:html={authors} />}
+  {venue && <p class="pub-venue" set:html={venue} />}
+  {meta && <p class="pub-meta muted">{meta}</p>}
+
+  {
+    (abstract || bibtex || links.length > 0) && (
+      <div class="pub-actions">
+        {abstract && (
+          <button type="button" class="pill" aria-expanded="false" data-toggle="abstract">
+            Abstract
+          </button>
+        )}
+        {links.map((l) => (
+          <a class="pill" href={l.href} target="_blank" rel="noopener noreferrer">
+            {l.label}
+          </a>
+        ))}
+        {bibtex && (
+          <button type="button" class="pill" aria-expanded="false" data-toggle="bibtex">
+            BibTeX
+          </button>
+        )}
+      </div>
+    )
+  }
+
+  {abstract && <div class="pub-panel" data-panel="abstract" hidden>{abstract}</div>}
+  {
+    bibtex && (
+      <div class="pub-panel" data-panel="bibtex" hidden>
+        <button type="button" class="pill pill-copy">
+          Copy
+        </button>
+        <pre>{bibtex}</pre>
+      </div>
+    )
+  }
+</div>
+
+<script>
+  // Astro 会把组件脚本打包一次并全局执行，所以这里一次性接管页面上所有 .pub。
+  document.querySelectorAll(".pub").forEach((pub) => {
+    const buttons = pub.querySelectorAll("[data-toggle]");
+    const panels = pub.querySelectorAll("[data-panel]");
+    let open = null; // 'abstract' | 'bibtex' | null
+
+    const render = () => {
+      buttons.forEach((b) => {
+        const on = b.dataset.toggle === open;
+        b.classList.toggle("is-open", on);
+        b.setAttribute("aria-expanded", String(on));
+      });
+      panels.forEach((p) => {
+        p.hidden = p.dataset.panel !== open;
+      });
+    };
+
+    buttons.forEach((b) => {
+      b.addEventListener("click", () => {
+        open = open === b.dataset.toggle ? null : b.dataset.toggle;
+        render();
+      });
+    });
+
+    const copy = pub.querySelector(".pill-copy");
+    const pre = pub.querySelector("[data-panel='bibtex'] pre");
+    let timer;
+    copy?.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(pre.textContent);
+        copy.textContent = "Copied";
+        clearTimeout(timer);
+        timer = setTimeout(() => (copy.textContent = "Copy"), 1600);
+      } catch {
+        copy.textContent = "Copy"; // 剪贴板不可用时静默失败，文本仍可手动选中
+      }
+    });
+  });
+</script>

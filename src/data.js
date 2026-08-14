@@ -1,4 +1,6 @@
 // 站点内容都集中在这里，改这个文件即可更新主页文字。
+// 需要在文字里插链接、粗体、斜体的字段（about / authors / venue）写 HTML 片段，
+// 组件里用 set:html 渲染。
 
 // 简历路径。文件名带年月，别人存下来一眼知道是哪一版。
 // 更新简历时：把新 PDF 放进 public/（用新的年月命名），然后改这一行。
@@ -28,35 +30,27 @@ export const profile = {
 };
 
 export const about = [
-  <>
-    I am a sophomore studying Economics at the Southwestern University of
-    Finance and Economics (SWUFE), advised by Prof.{" "}
-    <a href="https://econ.swufe.edu.cn/info/1041/1764.htm">Hong Zou</a>. I
-    spent Spring 2026 as a visiting student at UC Berkeley. Currently, I am a research intern working with{" "}
-    <a href="https://kehang-zhu.github.io/">Kehang Zhu</a> (Harvard) on
-    LLM-based market simulation, a project advised by{" "}
-    <a href="https://john-joseph-horton.com/">Prof. John Horton</a> (MIT
-    Sloan).
-  </>,
-  <>
-    I use computational methods to study economic questions. My main focus is
-    using LLM agents to simulate economic behavior, which makes it possible to
-    ask how markets, rules, and institutions shape what people do. These are
-    questions that are often hard to test with human subjects alone. I have
-    also worked with NLP methods on policy text, building a structured
-    database of China’s consumption-promotion policies from over 5 million
-    government documents.
-  </>,
-  <>
-    I am still in the early stages of my research journey and actively
-    exploring these areas. If your interests intersect with computational
-    social science, LLM agents, or text-as-data, I’d love to connect. You can
-    find my CV{" "}
-    <a href={CV_URL} target="_blank" rel="noopener noreferrer">
-      here
-    </a>
-    .
-  </>,
+  `I am a sophomore studying Economics at the Southwestern University of
+   Finance and Economics (SWUFE), advised by Prof.
+   <a href="https://econ.swufe.edu.cn/info/1041/1764.htm">Hong Zou</a>. I
+   spent Spring 2026 as a visiting student at UC Berkeley. Currently, I am a
+   research intern working with
+   <a href="https://kehang-zhu.github.io/">Kehang Zhu</a> (Harvard) on
+   LLM-based market simulation, a project advised by
+   <a href="https://john-joseph-horton.com/">Prof. John Horton</a> (MIT
+   Sloan).`,
+  `I use computational methods to study economic questions. My main focus is
+   using LLM agents to simulate economic behavior, which makes it possible to
+   ask how markets, rules, and institutions shape what people do. These are
+   questions that are often hard to test with human subjects alone. I have
+   also worked with NLP methods on policy text, building a structured
+   database of China’s consumption-promotion policies from over 5 million
+   government documents.`,
+  `I am still in the early stages of my research journey and actively
+   exploring these areas. If your interests intersect with computational
+   social science, LLM agents, or text-as-data, I’d love to connect. You can
+   find my CV
+   <a href="${CV_URL}" target="_blank" rel="noopener noreferrer">here</a>.`,
 ];
 
 export const education = [
@@ -87,12 +81,8 @@ export const publications = [
     title:
       "PersonaForge: Psychology-Grounded Dual-Process Architecture for " +
       "Personality-Consistent Role-Playing Agents",
-    authors: (
-      <>
-        Jizhou Tong and <strong>Sirui Zou</strong> (equal contribution)
-      </>
-    ),
-    venue: <em>Findings of the ACL: ACL 2026</em>,
+    authors: "Jizhou Tong and <strong>Sirui Zou</strong> (equal contribution)",
+    venue: "<em>Findings of the ACL: ACL 2026</em>",
     abstract:
       "Large Language Models excel at role-playing but struggle to maintain " +
       "consistent personalities across extended multi-turn interactions. We " +
