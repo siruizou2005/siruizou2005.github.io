@@ -1,0 +1,55 @@
+---
+// 明暗切换。主题本身由 index.astro <head> 里的内联脚本在首次绘制前就定好了，
+// 这里只负责记下选择并翻转属性。
+//
+// 刻意不写 aria-label：按钮上看得见的字就是它的可访问名。写成
+// aria-label="Switch to dark theme" 而按钮显示「深色模式」会违反 WCAG 2.5.3
+// （Label in Name）——用语音控制的人念的是他看得见的字，对不上就点不动。
+---
+
+<button type="button" class="theme-toggle" data-theme-toggle>
+  <span class="when-light">
+    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+    </svg>
+    深色模式
+  </span>
+  <span class="when-dark">
+    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="4.2" fill="currentColor"></circle>
+      <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2"></path>
+        <path d="M5.4 5.4 7 7M17 17l1.6 1.6M18.6 5.4 17 7M7 17l-1.6 1.6"></path>
+      </g>
+    </svg>
+    浅色模式
+  </span>
+</button>
+
+<script>
+  const root = document.documentElement;
+  const button = document.querySelector("[data-theme-toggle]");
+
+  button?.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      // 隐私模式下写不进去，那就只是这次的选择不被记住
+    }
+  });
+
+  // 在访客做出选择之前，继续跟随系统设置的实时变化
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    let saved = null;
+    try {
+      saved = localStorage.getItem("theme");
+    } catch {
+      // 读不到就当没选过
+    }
+    if (!saved) root.dataset.theme = e.matches ? "dark" : "light";
+  });
+</script>

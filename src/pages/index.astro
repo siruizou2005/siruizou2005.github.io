@@ -91,6 +91,22 @@ const jsonLd = {
 <!doctype html>
 <html lang="en">
   <head>
+    {/* 在首次绘制前跑，页面因此不会闪一下错误的配色。
+        刻意内联且极小：换成外部文件就是一次阻塞渲染的往返。 */}
+    <script is:inline>
+      let saved = null;
+      try {
+        saved = localStorage.getItem("theme");
+      } catch {
+        /* 隐私模式：按系统设置来 */
+      }
+      document.documentElement.dataset.theme =
+        saved === "dark" ||
+        (saved !== "light" && matchMedia("(prefers-color-scheme: dark)").matches)
+          ? "dark"
+          : "light";
+    </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -150,15 +166,19 @@ const jsonLd = {
         </Section>
 
         <Section id="publications" title="Publications">
-          {publications.map((p) => <PubItem {...p} />)}
+          <div class="pubs">
+            {publications.map((p) => <PubItem {...p} />)}
+          </div>
         </Section>
 
         {
           workingPapers.length > 0 && (
             <Section id="working-papers" title="Working Papers">
-              {workingPapers.map((p) => (
-                <PubItem {...p} />
-              ))}
+              <div class="pubs">
+                {workingPapers.map((p) => (
+                  <PubItem {...p} />
+                ))}
+              </div>
             </Section>
           )
         }

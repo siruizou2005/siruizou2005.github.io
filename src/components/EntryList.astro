@@ -3,6 +3,14 @@ import { Image } from "astro:assets";
 
 // Education 和 Research Experience 共用：可选校徽在左，机构名和角色居中，
 // 日期右对齐成一列。两个板块用同一个组件，排版不会走样。
+//
+// 除 org 外都是可选的：
+//   desc   一两句话说明这是什么
+//   role   你的角色、导师，或其他次要信息
+//   date   右侧一列
+//   logo   构建时处理过的图片，48px
+//   url    让机构名变成链接
+//   links  一排方框按钮，与论文条目同款
 const { items } = Astro.props;
 const withLogo = items.some((e) => e.logo);
 ---
@@ -26,23 +34,34 @@ const withLogo = items.some((e) => e.logo);
         )}
         <div>
           <p class="entry-org">
-            <strong>{e.org}</strong>
+            <strong>
+              {e.url ? (
+                <a href={e.url} target="_blank" rel="noopener noreferrer">
+                  {e.org}
+                </a>
+              ) : (
+                e.org
+              )}
+            </strong>
           </p>
           {/* 描述在前、指导老师在后：先让人知道这是什么，再交代由谁指导 */}
           {e.desc && <p class="entry-desc">{e.desc}</p>}
-          {/* 链接接在角色行末尾，用「·」分隔，避免单个按钮孤零零占一行 */}
-          {(e.role || e.links?.length > 0) && (
-            <p class="entry-role muted">
-              {e.role}
-              {e.links?.map((l, i) => (
-                <span>
-                  {(e.role || i > 0) && " · "}
-                  <a href={l.href} target="_blank" rel="noopener noreferrer">
-                    {l.label}
-                  </a>
-                </span>
+          {e.role && <p class="entry-role muted">{e.role}</p>}
+          {/* 和论文那排一样的方框按钮：带代码和文档的项目，读起来才和带 PDF
+              的论文一样有分量。标签写实际是什么：Code / Website / Docs / Demo。 */}
+          {e.links?.length > 0 && (
+            <div class="entry-actions">
+              {e.links.map((l) => (
+                <a
+                  class="pill"
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {l.label}
+                </a>
               ))}
-            </p>
+            </div>
           )}
         </div>
         <span class="entry-date muted-2">{e.date}</span>

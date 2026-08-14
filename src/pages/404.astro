@@ -1,0 +1,67 @@
+---
+// GitHub Pages 会用这个页面响应任何不存在的地址。
+import { Font } from "astro:assets";
+import { profile } from "../data.js";
+import "../styles/index.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <script is:inline>
+      let saved = null;
+      try {
+        saved = localStorage.getItem("theme");
+      } catch {
+        /* 隐私模式：按系统设置来 */
+      }
+      document.documentElement.dataset.theme =
+        saved === "dark" ||
+        (saved !== "light" && matchMedia("(prefers-color-scheme: dark)").matches)
+          ? "dark"
+          : "light";
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found — {profile.nameEn}</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <Font cssVariable="--font-source-serif-4" preload />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>
+        <a href="/">{profile.nameEn} <span class="cn">{profile.nameCn}</span></a>
+      </h1>
+    </header>
+
+    <div class="page page-narrow">
+      <main>
+        <section>
+          <h2>Page not found</h2>
+          <hr />
+          <div class="prose">
+            <p>
+              That address does not exist on this site. <a href="/"
+                >Back to the homepage</a
+              >.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
+
+<style>
+  /* 单栏：404 没有侧栏可以并排 */
+  .page-narrow {
+    grid-template-columns: 1fr;
+  }
+  /* 页头的名字在这里是回首页的链接，但看起来仍是标题 */
+  .site-header h1 a {
+    color: inherit;
+    text-decoration: none;
+  }
+</style>

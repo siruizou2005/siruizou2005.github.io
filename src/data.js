@@ -66,12 +66,16 @@ export const education = [
     role: "B.A. in Economics",
     date: "Sep 2024 – Jun 2028 (expected)",
     logo: swufe,
+    // url 让机构名变成链接。注意 index.astro 里的 JSON-LD 目前另写了一份
+    // 同样的地址，改一处要记得改另一处。
+    url: "https://www.swufe.edu.cn/",
   },
   {
     org: "University of California, Berkeley",
     role: "Visiting Student",
     date: "Jan 2026 – May 2026",
     logo: berkeley,
+    url: "https://www.berkeley.edu/",
   },
   {
     // 北大是主办方，国发院只是选课来源——把 NSD 放在 role 里而不是机构名里，
@@ -80,6 +84,7 @@ export const education = [
     role: "Summer School, coursework at the National School of Development",
     date: "Jul 2025 – Aug 2025",
     logo: pku,
+    url: "https://www.pku.edu.cn/",
   },
 ];
 
