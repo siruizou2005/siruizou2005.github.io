@@ -162,7 +162,7 @@ export const experience = [
   {
     org: "Basic Public Service Equalization and Common Prosperity",
     desc: "A city-year panel of 280 cities (2012–2024) asking whether unequal access to public services widens the urban–rural income gap.",
-    role: "Research assistant, advised by Prof. Fan Wei (SWUFE)",
+    role: "Research assistant, advised by Prof. Wei Fan (SWUFE)",
     date: "Jan 2026 – May 2026",
   },
 ];
