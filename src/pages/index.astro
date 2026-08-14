@@ -1,4 +1,5 @@
 ---
+import { Font, getImage } from "astro:assets";
 import Sidebar from "../components/Sidebar.astro";
 import Section from "../components/Section.astro";
 import EntryList from "../components/EntryList.astro";
@@ -23,13 +24,24 @@ const socialDescription =
   "Undergraduate in Economics at SWUFE. LLM agents for economic simulation, " +
   "computational social science, text-as-data.";
 
+// 分享卡片和 JSON-LD 需要一张绝对 URL 的图。页面上显示的头像是 WebP，
+// 但微信、LinkedIn 这类抓取器对 WebP 支持不齐，所以这里单独产一张 JPEG。
+// 文件名带内容 hash，照片不变则 URL 不变，社交平台的缓存不会失效。
+const ogImage = await getImage({
+  src: profile.photo,
+  format: "jpeg",
+  width: 900,
+  height: 1080,
+});
+const ogImageUrl = new URL(ogImage.src, Astro.site).href;
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Sirui Zou",
   alternateName: "邹思瑞",
   url: "https://siruizou.com/",
-  image: "https://siruizou.com/photo.jpg",
+  image: ogImageUrl,
   email: "mailto:siruizou2005@gmail.com",
   jobTitle: "Undergraduate Researcher",
   description:
@@ -74,12 +86,6 @@ const jsonLd = {
     "https://scholar.google.com/citations?user=lpaB53UAAAAJ",
   ],
 };
-
-// 首屏图片提前预载（原 React 19 版本会自动吐这几条 link，这里显式写出来）
-const preloadImages = [
-  profile.photo,
-  ...education.map((e) => e.logo).filter(Boolean),
-];
 ---
 
 <!doctype html>
@@ -101,13 +107,13 @@ const preloadImages = [
     <meta property="og:title" content="Sirui Zou 邹思瑞" />
     <meta property="og:description" content={socialDescription} />
     <meta property="og:url" content="https://siruizou.com/" />
-    <meta property="og:image" content="https://siruizou.com/photo.jpg" />
+    <meta property="og:image" content={ogImageUrl} />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="zh_CN" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Sirui Zou 邹思瑞" />
     <meta name="twitter:description" content={socialDescription} />
-    <meta name="twitter:image" content="https://siruizou.com/photo.jpg" />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <!-- 结构化数据：让搜索引擎和 AI 明确知道「这是谁、在哪、做什么、发了什么」 -->
     <script
@@ -116,14 +122,10 @@ const preloadImages = [
       set:html={JSON.stringify(jsonLd)}
     />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Noto+Serif+SC:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-
-    {preloadImages.map((src) => <link rel="preload" as="image" href={src} />)}
+    <!-- 字体自托管，不再请求 fonts.googleapis.com。preload 让正文字体
+         和 HTML 并行下载，中文子集由 index.css 里的 @font-face 声明。 -->
+    <Font cssVariable="--font-source-serif-4" preload />
+    <link rel="preload" href="/fonts/noto-serif-sc-subset.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body>
     {/* 通栏姓名栏：细线 full-bleed 横跨视口，标题与下方内容左对齐 */}

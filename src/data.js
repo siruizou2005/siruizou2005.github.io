@@ -2,6 +2,13 @@
 // 需要在文字里插链接、粗体、斜体的字段（about / authors / venue）写 HTML 片段，
 // 组件里用 set:html 渲染。
 
+// 图片从 src/assets/ 导入而不是写 public/ 下的路径字符串：这样 Astro 才能
+// 在构建时压缩、转 WebP 并生成 srcset。换照片/校徽时替换对应文件即可。
+import photo from "./assets/photo.jpg";
+import swufe from "./assets/logos/swufe.png";
+import berkeley from "./assets/logos/berkeley.png";
+import pku from "./assets/logos/pku.png";
+
 // 简历路径。文件名带年月，别人存下来一眼知道是哪一版。
 // 更新简历时：把新 PDF 放进 public/（用新的年月命名），然后改这一行。
 // 正文和左栏的 CV 链接共用这个常量，改一处即可。
@@ -15,7 +22,7 @@ export const profile = {
     "Southwestern University of Finance and Economics",
   ],
   location: "Chengdu, China",
-  photo: "photo.jpg", // 放到 public/ 目录下；没有照片时显示灰色占位
+  photo, // src/assets/photo.jpg；加载失败时显示灰色占位
   links: [
     { label: "Email", href: "mailto:siruizou2005@gmail.com" },
     { label: "GitHub", href: "https://github.com/siruizou2005" },
@@ -49,8 +56,8 @@ export const about = [
   `I am still in the early stages of my research journey and actively
    exploring these areas. If your interests intersect with computational
    social science, LLM agents, or text-as-data, I’d love to connect. You can
-   find my CV
-   <a href="${CV_URL}" target="_blank" rel="noopener noreferrer">here</a>.`,
+   find
+   <a href="${CV_URL}" target="_blank" rel="noopener noreferrer">my CV here</a>.`,
 ];
 
 export const education = [
@@ -58,13 +65,13 @@ export const education = [
     org: "Southwestern University of Finance and Economics",
     role: "B.A. in Economics",
     date: "Sep 2024 – Jun 2028 (expected)",
-    logo: "logos/swufe.png",
+    logo: swufe,
   },
   {
     org: "University of California, Berkeley",
     role: "Visiting Student",
     date: "Jan 2026 – May 2026",
-    logo: "logos/berkeley.png",
+    logo: berkeley,
   },
   {
     // 北大是主办方，国发院只是选课来源——把 NSD 放在 role 里而不是机构名里，
@@ -72,7 +79,7 @@ export const education = [
     org: "Peking University",
     role: "Summer School, coursework at the National School of Development",
     date: "Jul 2025 – Aug 2025",
-    logo: "logos/pku.png",
+    logo: pku,
   },
 ];
 

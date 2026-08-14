@@ -6,8 +6,9 @@
   --color-accent: #0088b0;
   --color-accent-700: #006786;
   --color-divider: color-mix(in srgb, #201e1d 16%, transparent);
-  --font-heading: "Source Serif 4", Georgia, serif;
-  --font-body: "Source Serif 4", Georgia, serif;
+  /* Source Serif 4 由 Astro 构建时下载并自托管，变量名见 astro.config.mjs */
+  --font-heading: var(--font-source-serif-4), Georgia, serif;
+  --font-body: var(--font-source-serif-4), Georgia, serif;
 
   /* 中文字体。默认宋体（思源宋体，与 Source Serif 4 同为衬线，风格相配）。
      想换楷书就把下面两行对调 —— 但注意楷书没有可靠的网络字体，
@@ -20,6 +21,17 @@
   --content-max: 1320px;
   --gutter: 76px;
   --sidebar-w: 268px;
+}
+
+/* 思源宋体，只含「邹思瑞」三个字的子集（2.7 KB）。
+   要改中文名时，得重新生成这个文件，见 README「字体」一节。 */
+@font-face {
+  font-family: "Noto Serif SC";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/noto-serif-sc-subset.woff2") format("woff2");
+  unicode-range: U+601d, U+745e, U+90b9;
 }
 
 *,
@@ -66,8 +78,9 @@ a:hover {
 .muted {
   color: color-mix(in srgb, var(--color-text) 70%, transparent);
 }
+/* 65% 是过 WCAG AA（4.5:1）的最低档：60% 只有 4.24:1，65% 为 4.95:1 */
 .muted-2 {
-  color: color-mix(in srgb, var(--color-text) 60%, transparent);
+  color: color-mix(in srgb, var(--color-text) 65%, transparent);
 }
 
 /* ── 通栏姓名栏 ─────────────────────────────────────────────
@@ -325,7 +338,7 @@ section hr {
 footer {
   margin-top: 8px;
   font-size: 14px;
-  color: color-mix(in srgb, var(--color-text) 50%, transparent);
+  color: color-mix(in srgb, var(--color-text) 65%, transparent);
 }
 
 /* ── 响应式 ────────────────────────────────────────────────── */

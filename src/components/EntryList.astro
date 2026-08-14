@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 // Education 和 Research Experience 共用：可选校徽在左，机构名和角色居中，
 // 日期右对齐成一列。两个板块用同一个组件，排版不会走样。
 const { items } = Astro.props;
@@ -10,7 +12,17 @@ const withLogo = items.some((e) => e.logo);
     items.map((e) => (
       <div class="entry">
         {withLogo && (
-          <span class="entry-logo">{e.logo && <img src={e.logo} alt="" />}</span>
+          <span class="entry-logo">
+            {e.logo && (
+              <Image
+                src={e.logo}
+                alt=""
+                widths={[48, 96, 144]}
+                sizes="48px"
+                loading="lazy"
+              />
+            )}
+          </span>
         )}
         <div>
           <p class="entry-org">
