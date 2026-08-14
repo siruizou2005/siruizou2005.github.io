@@ -22,3 +22,13 @@ dist
 *.njsproj
 *.sln
 *.sw?
+
+# LaTeX 编译产物。cv/ 只放源码 cv.tex；发布用的 PDF 在 public/，
+# 仓库里不存两份，免得哪天改了源码只更新其中一份。
+cv/*.pdf
+cv/*.aux
+cv/*.out
+cv/*.toc
+cv/*.fls
+cv/*.fdb_latexmk
+cv/*.synctex.gz
