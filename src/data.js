@@ -63,7 +63,9 @@ export const about = [
 export const education = [
   {
     org: "Southwestern University of Finance and Economics",
-    role: "B.A. in Economics",
+    // 国内经济学本科授「经济学学士」，是独立学位门类，不是 B.A./B.S.，
+    // 学位证英文是 Bachelor of Economics，这里保持一致。
+    role: "Bachelor of Economics",
     date: "Sep 2024 – Jun 2028 (expected)",
     logo: swufe,
     // url 让机构名变成链接。注意 index.astro 里的 JSON-LD 目前另写了一份
