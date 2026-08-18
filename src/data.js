@@ -182,6 +182,7 @@ export const projects = [
     role: "Team lead · Global 3rd Prize, 2025 Soul AI Agent Competition",
     date: "Oct 2025 – Dec 2025",
     links: [
+      { label: "Demo", href: "https://scrollweaver.siruizou.com/" },
       { label: "Code", href: "https://github.com/siruizou2005/ScrollWeaver" },
     ],
   },
