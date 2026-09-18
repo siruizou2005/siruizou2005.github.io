@@ -40,8 +40,8 @@ export const about = [
   `I am a sophomore studying Economics at the Southwestern University of
    Finance and Economics (SWUFE), advised by Prof.
    <a href="https://econ.swufe.edu.cn/info/1041/1764.htm">Hong Zou</a>. I
-   spent Spring 2026 as a visiting student at UC Berkeley. Currently, I am a
-   research intern working with
+   spent Spring 2026 as a visiting student at UC Berkeley. From April to
+   August 2026, I was a research intern working with
    <a href="https://kehang-zhu.github.io/">Kehang Zhu</a> (Harvard) on
    LLM-based market simulation, a project advised by
    <a href="https://john-joseph-horton.com/">Prof. John Horton</a> (MIT
@@ -156,9 +156,9 @@ export const workingPapers = [];
 export const experience = [
   {
     org: "Generative Market Simulation",
-    desc: "Building a prediction market where LLM agents trade through the same interface a human trader would, to study which strategies emerge and how prices form.",
+    desc: "Built a prediction market where LLM agents trade through the same interface a human trader would, to study which strategies emerge and how prices form.",
     role: "Supervised by Kehang Zhu (Harvard), advised by Prof. John Horton (MIT Sloan)",
-    date: "Apr 2026 – Present",
+    date: "Apr 2026 – Aug 2026",
   },
   {
     org: "Decoding China’s Consumption Policy",
@@ -194,4 +194,4 @@ export const projects = [
   },
 ];
 
-export const lastUpdated = "August 2026";
+export const lastUpdated = "September 2026";
