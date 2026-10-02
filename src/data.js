@@ -37,7 +37,7 @@ export const profile = {
 };
 
 export const about = [
-  `I am a sophomore studying Economics at the Southwestern University of
+  `I am a junior studying Economics at the Southwestern University of
    Finance and Economics (SWUFE), advised by Prof.
    <a href="https://econ.swufe.edu.cn/info/1041/1764.htm">Hong Zou</a>. I
    spent Spring 2026 as a visiting student at UC Berkeley. From April to
