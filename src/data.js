@@ -38,8 +38,8 @@ export const profile = {
 
 export const about = [
   `I am a junior studying Economics at the Southwestern University of
-   Finance and Economics (SWUFE), advised by Prof.
-   <a href="https://econ.swufe.edu.cn/info/1041/1764.htm">Hong Zou</a>. I
+   Finance and Economics (SWUFE), advised by
+   <a href="https://econ.swufe.edu.cn/info/1041/1764.htm">Prof. Hong Zou</a>. I
    spent Spring 2026 as a visiting student at UC Berkeley. I then did summer
    research with
    <a href="https://kehang-zhu.github.io/">Kehang Zhu</a> (Harvard) on
