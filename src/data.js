@@ -208,7 +208,7 @@ export const experience = [
   {
     org: "Decoding China’s Consumption Policy",
     desc: "A two-stage text-as-data pipeline over government documents (mainly 2006–2024), measuring which policy instruments are used, at what intensity, and for whom.",
-    role: "Project lead, advised by Prof. Hong Zou and Dr. Han Xiao (SWUFE)",
+    role: "Joint work with Prof. Hong Zou and Dr. Han Xiao (SWUFE)",
     date: "Jan 2026 – Present",
   },
   {
