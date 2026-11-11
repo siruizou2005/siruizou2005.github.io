@@ -114,8 +114,8 @@
       \resumeItemListEnd
 
     \resumeSubheading
-      {Peking University (National School of Development)}{Jul 2025 -- Aug 2025}
-      {Summer School: Quantitative Finance}{Beijing, China}
+      {Peking University}{Jul 2025 -- Aug 2025}
+      {Summer School: Quantitative Finance (coursework at the National School of Development)}{Beijing, China}
       \resumeItemListStart
         \resumeItem{\textbf{Grade}: \textbf{A+} (Top 10/150). Focused on stochastic analysis and quantitative pricing models.}
       \resumeItemListEnd
@@ -135,8 +135,22 @@
 
   \resumeSubHeadingListEnd
 
+%-----------WORKING PAPERS-----------
+\section{Working Papers}
+  \resumeSubHeadingListStart
+
+    \resumeProjectHeading
+      {\textbf{Do Prices Reveal What Insiders Know? A Reexamination of Plott and Sunder (1982)}}{\textbf{Working Paper, Oct 2026}}
+    \resumeItemListStart
+        \resumeItem{Sirui Zou \enspace \href{https://siruizou.com/\#working-papers}{siruizou.com} \enspace | \enspace Data and code: \href{https://github.com/siruizou2005/Plott-Sunder-1982}{github.com/siruizou2005/Plott-Sunder-1982}}
+        \resumeItem{\textbf{Design}: In this classic laboratory study, prices can separate rational expectations (RE) from prior information only when insiders' news is bad. When the news is good, both theories predict the same price, whatever the dividends and priors.}
+        \resumeItem{\textbf{Evidence}: Transcribed the original transaction records (987 trades, 61 periods, five markets). In the \textbf{17} bad-news periods behind the original conclusion, prices move from their no-information level toward the RE price in only \textbf{one of five} markets. In good-news periods, the first trade covers about \textbf{30\%} of the distance to the informed value, and prices close most of the gap during trading.}
+    \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
 %-----------RESEARCH EXPERIENCE-----------
-\section{Academic \& Research Experience}
+\section{Research Experience}
   \resumeSubHeadingListStart
 
     \resumeSubheading
@@ -147,15 +161,15 @@
         \resumeItem{\textbf{Method}: Built the testbed, a binary prediction-market engine (collateral-backed YES/NO minting/merging, order-book matching) that LLM agents drive through the same tool interface a human trader would use, with a live dashboard and full replay logs. Core design principle: the researcher designs the environment (information, institutions, incentives) but never scripts agent behavior. Validated that a bare LLM trades rationally before running strategy experiments.}
     \resumeItemListEnd
 
+    \newpage
     \resumeSubheading
       {Decoding China's Consumption Policy}{Jan 2026 -- Present}
       {\footnotesize\emph{Project Lead (Advisors: Prof. Hong Zou, Dean of School of Economics, \& Dr. Han Xiao, SWUFE)}}{}
     \resumeItemListStart
         \resumeItem{\textbf{Research Question}: How can China's consumption-promotion policies (which instruments, for which target groups and goods, at what intensity) be measured systematically and reproducibly across large volumes of heterogeneous, often implicitly-worded government documents?}
-        \resumeItem{\textbf{Method}: Leading a two-stage text-as-data pipeline on 5M+ government documents (mainly 2006--2024): (1) a fine-tuned BERT classifier, benchmarked against keyword search and LLMs, to screen consumption-promotion policies; (2) LLM-based structured extraction of policy attributes (instrument type, intensity, target population, goods category, intergovernmental citation), with manual gold-standard annotation, cross-model consistency checks, and hallucination controls. Building China's first independently cross-verified national consumption-policy database for downstream city-panel analysis.}
+        \resumeItem{\textbf{Method}: Leading a two-stage text-as-data pipeline on 5M+ government documents (mainly 2006--2024): (1) a fine-tuned BERT classifier, benchmarked against keyword search and LLMs, to screen consumption-promotion policies; (2) LLM-based structured extraction of policy attributes (instrument type, intensity, target population, goods category, intergovernmental citation), with manual gold-standard annotation, cross-model consistency checks, and hallucination controls. Building an independently cross-verified national consumption-policy database for downstream city-panel analysis.}
     \resumeItemListEnd
 
-    \newpage
     \resumeSubheading
       {Basic Public Service Equalization and Common Prosperity}{Jan 2026 -- May 2026}
       {\footnotesize\emph{Research Assistant (Advisor: Prof. Wei Fan, SWUFE) $\cdot$ Sichuan Province-Level Research Grant}}{}
@@ -185,14 +199,6 @@
           {\textbf{Magic Brush}: AI-Powered Drawing Tutor for Children \quad \footnotesize\emph{Private Developer}}{Nov 2025 -- Dec 2025}
       \resumeItemListStart
         \resumeItem{Competed in the \textbf{Doubao $\times$ Intel ``Make Ideas Real'' AI App Creation Challenge}; awarded \textbf{Bronze Prize (Top 30)}. Built an AI-powered step-by-step sketch drawing assistant designed to engage children independently through interactive guidance and real-time feedback.}
-        \resumeItem{\textbf{Stack}: Doubao App Generation platform; multi-turn interactive dialogue flow with progressive drawing instruction and child-friendly UX design.}
-      \resumeItemListEnd
-
-    \resumeProjectHeading
-      {\textbf{Course Prism: Course Evaluation \& Retrieval Community} \quad \footnotesize\emph{Private Developer}}{Mar 2025 -- Jun 2025}
-      \resumeItemListStart
-        \resumeItem{\textbf{Development}: Independently developed SWUFE's open-source course evaluation platform. Built interactive UI via Next.js/React and implemented RESTful APIs/unified auth using Django REST, PostgreSQL, and Redis.}
-        \resumeItem{\textbf{Deployment}: Configured Docker Compose, Nginx reverse proxy, and Huey async task queues for one-click containerized deployment, automated data backup, and rapid recovery.}
       \resumeItemListEnd
 
   \resumeSubHeadingListEnd

@@ -12,7 +12,7 @@ import pku from "./assets/logos/pku.png";
 // 简历路径。文件名带年月，别人存下来一眼知道是哪一版。
 // 更新简历时：把新 PDF 放进 public/（用新的年月命名），然后改这一行。
 // 正文和左栏的 CV 链接共用这个常量，改一处即可。
-export const CV_URL = "Sirui_Zou_CV_Aug2026.pdf";
+export const CV_URL = "Sirui_Zou_CV_Nov2026.pdf";
 
 export const profile = {
   nameEn: "Sirui Zou",
