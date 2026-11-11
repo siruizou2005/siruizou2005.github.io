@@ -49,8 +49,9 @@ export const about = [
    guidance of
    <a href="https://www.jasonshachat.org/">Prof. Jason Shachat</a>.`,
   `I use computational methods to study economic questions. My main focus is
-   using LLM agents to simulate economic behavior, which makes it possible to
-   ask how markets, rules, and institutions shape what people do. These are
+   using LLM agents to simulate economic behavior, so that I can study how
+   people behave and ask how markets, rules, and institutions shape what they
+   do. These are
    questions that are often hard to test with human subjects alone. More
    recently, I have been studying experimental asset markets, trying to
    explain why traders behave the way they do. I have also worked with NLP
