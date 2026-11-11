@@ -1,9 +1,18 @@
 ---
 // 论文条目：标题 / 作者 / 出处，下面一排方框按钮。
-// Abstract 和 BibTeX 就地展开，Paper、Code 直接跳外链。
-// 两个面板在 HTML 里就存在（带 hidden），由脚本切换显示——
+// Abstract、Acknowledgments 和 BibTeX 就地展开，Paper、Code 直接跳外链。
+// 面板在 HTML 里就存在（带 hidden），由脚本切换显示——
 // 这样不执行 JS 的爬虫也能读到摘要，视觉表现与原来一致。
-const { title, authors, venue, abstract, bibtex, links = [], meta } = Astro.props;
+const {
+  title,
+  authors,
+  venue,
+  abstract,
+  acknowledgments,
+  bibtex,
+  links = [],
+  meta,
+} = Astro.props;
 ---
 
 <div class="pub">
@@ -15,7 +24,7 @@ const { title, authors, venue, abstract, bibtex, links = [], meta } = Astro.prop
   {meta && <p class="pub-meta muted">{meta}</p>}
 
   {
-    (abstract || bibtex || links.length > 0) && (
+    (abstract || acknowledgments || bibtex || links.length > 0) && (
       <div class="pub-actions">
         {abstract && (
           <button type="button" class="pill" aria-expanded="false" data-toggle="abstract">
@@ -27,6 +36,16 @@ const { title, authors, venue, abstract, bibtex, links = [], meta } = Astro.prop
             {l.label}
           </a>
         ))}
+        {acknowledgments && (
+          <button
+            type="button"
+            class="pill"
+            aria-expanded="false"
+            data-toggle="acknowledgments"
+          >
+            Acknowledgments
+          </button>
+        )}
         {bibtex && (
           <button type="button" class="pill" aria-expanded="false" data-toggle="bibtex">
             BibTeX
@@ -37,6 +56,13 @@ const { title, authors, venue, abstract, bibtex, links = [], meta } = Astro.prop
   }
 
   {abstract && <div class="pub-panel" data-panel="abstract" hidden>{abstract}</div>}
+  {
+    acknowledgments && (
+      <div class="pub-panel" data-panel="acknowledgments" hidden>
+        {acknowledgments}
+      </div>
+    )
+  }
   {
     bibtex && (
       <div class="pub-panel" data-panel="bibtex" hidden>
@@ -54,7 +80,7 @@ const { title, authors, venue, abstract, bibtex, links = [], meta } = Astro.prop
   document.querySelectorAll(".pub").forEach((pub) => {
     const buttons = pub.querySelectorAll("[data-toggle]");
     const panels = pub.querySelectorAll("[data-panel]");
-    let open = null; // 'abstract' | 'bibtex' | null
+    let open = null; // 'abstract' | 'acknowledgments' | 'bibtex' | null
 
     const render = () => {
       buttons.forEach((b) => {

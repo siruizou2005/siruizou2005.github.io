@@ -40,22 +40,25 @@ export const about = [
   `I am a junior studying Economics at the Southwestern University of
    Finance and Economics (SWUFE), advised by Prof.
    <a href="https://econ.swufe.edu.cn/info/1041/1764.htm">Hong Zou</a>. I
-   spent Spring 2026 as a visiting student at UC Berkeley. From April to
-   August 2026, I was a research intern working with
+   spent Spring 2026 as a visiting student at UC Berkeley. I then did summer
+   research with
    <a href="https://kehang-zhu.github.io/">Kehang Zhu</a> (Harvard) on
    LLM-based market simulation, a project advised by
    <a href="https://john-joseph-horton.com/">Prof. John Horton</a> (MIT
-   Sloan).`,
+   Sloan). I am now working on a laboratory asset-market experiment under the
+   guidance of
+   <a href="https://www.jasonshachat.org/">Prof. Jason Shachat</a>.`,
   `I use computational methods to study economic questions. My main focus is
    using LLM agents to simulate economic behavior, which makes it possible to
    ask how markets, rules, and institutions shape what people do. These are
-   questions that are often hard to test with human subjects alone. I have
-   also worked with NLP methods on policy text, building a structured
-   database of China’s consumption-promotion policies from over 5 million
-   government documents.`,
+   questions that are often hard to test with human subjects alone. More
+   recently, I have been studying experimental asset markets, trying to
+   explain why traders behave the way they do. I have also worked with NLP
+   methods on policy text, building a structured database of China’s
+   consumption-promotion policies from over 5 million government documents.`,
   `I am still in the early stages of my research journey and actively
-   exploring these areas. If your interests intersect with computational
-   social science, LLM agents, or text-as-data, I’d love to connect. You can
+   exploring these areas. If your interests intersect with LLM agents,
+   experimental economics, or text-as-data, I’d love to connect. You can
    find
    <a href="${CV_URL}" target="_blank" rel="noopener noreferrer">my CV here</a>.`,
 ];
@@ -147,9 +150,52 @@ export const publications = [
   },
 ];
 
-// 暂无在投/在写的论文。有了之后往这里加条目，
-// Working Papers 板块会自动出现（数组为空时不渲染）。
-export const workingPapers = [];
+// 已有可外发稿子的论文。数组为空时 Working Papers 板块不渲染。
+// 出新版时：把新 PDF 放进 public/（文件名带年月），改下面的 href 和 venue 里的
+// 日期；摘要和致谢照抄稿子首页，保持与 PDF 一致。
+export const workingPapers = [
+  {
+    title:
+      "Do Prices Reveal What Insiders Know? A Reexamination of Plott and " +
+      "Sunder (1982)",
+    authors: "<strong>Sirui Zou</strong>",
+    venue: "<em>Working paper, October 2026</em>",
+    abstract:
+      "I reexamine a seminal laboratory study reporting that, with " +
+      "repetition, prices quickly reveal what insiders know. In its design, " +
+      "prices can distinguish rational expectations from prior information " +
+      "only in downward periods, when insiders’ information lowers the " +
+      "asset’s value below what uninformed traders would pay; when it raises " +
+      "the value, both theories predict the same price. Of the 17 downward " +
+      "periods behind the original conclusion, only those in one of five " +
+      "markets show prices moving from their no-information level toward the " +
+      "fully revealing price. In two markets, prices are already near that " +
+      "price when no one is informed; in the other two, they stay above it. " +
+      "In upward periods, the first trade covers about 30 percent of the " +
+      "distance to the informed value, and prices close most of the gap " +
+      "during trading. As a pretest for a human experiment, I run LLM-agent " +
+      "markets that make the two directions symmetric; prices there cover " +
+      "only about 40 percent of the distance on both sides.",
+    // 稿子首页脚注的致谢原文，不含邮箱和数据链接两句（后者已有 Code 按钮）。
+    acknowledgments:
+      "I am grateful to Kehang Zhu for his patient and careful guidance " +
+      "during the summer research from which this paper grew. I thank John " +
+      "Horton for discussions and support, and Anand Shah for discussions " +
+      "that inspired several of the ideas here. I am also grateful to Jason " +
+      "Shachat for suggestions on revising the paper, and to Hong Zou for " +
+      "support. I thank Shyam Sunder for sharing the 1980 working-paper " +
+      "version of Plott and Sunder (1982), which records every transaction. " +
+      "All errors are my own.",
+    // 暂不放 BibTeX：等有 SSRN / arXiv 这类稳定可引用的版本再加。
+    links: [
+      { label: "Paper", href: "Zou_Do_Prices_Reveal_Oct2026.pdf" },
+      {
+        label: "Code",
+        href: "https://github.com/siruizou2005/Plott-Sunder-1982",
+      },
+    ],
+  },
+];
 
 // 进行中的项目放这里而不是 Working Papers：后者意味着已有可外发的稿子。
 // 等某个项目成稿并有了正式标题，再挪到 workingPapers。
@@ -194,4 +240,4 @@ export const projects = [
   },
 ];
 
-export const lastUpdated = "September 2026";
+export const lastUpdated = "November 2026";

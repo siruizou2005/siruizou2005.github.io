@@ -24,6 +24,10 @@ covers almost every content change; `src/pages/index.astro` and the components i
 - `CV_URL` (top of `src/data.js`) points at the CV in `public/`. To update the
   CV: drop the new PDF into `public/` with a new year-month in the filename, then
   change that one constant.
+- Working papers: the `workingPapers` array in `src/data.js`. For a new draft,
+  drop the PDF into `public/` with the year-month in the filename and update
+  the entry's `Paper` link and date. The section is not rendered while the
+  array is empty.
 - Photo: `src/assets/photo.jpg`. Displayed as a portrait ellipse, so a roughly
   5:6 crop with the face near the vertical centre works best.
 - Institution logos: `src/assets/logos/`. Square, transparent background.
@@ -37,8 +41,8 @@ render WebP.
 
 The page is fully static — the only client-side JavaScript is the inline
 `<script>` in `src/components/PubItem.astro`, which expands the Abstract /
-BibTeX panels and drives the Copy button. Both panels are in the HTML from the
-start (with `hidden`), so crawlers that don't run JS still see the abstract.
+Acknowledgments / BibTeX panels and drives the Copy button. The panels are in
+the HTML from the start (with `hidden`), so crawlers that don't run JS still see the abstract.
 
 ## Fonts
 
